@@ -1,5 +1,12 @@
 # Black & Yellow
 
+![status](https://img.shields.io/badge/status-alpha-orange)
+![hosting](https://img.shields.io/badge/hosting-%240%2Fyear-brightgreen)
+![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=nextdotjs&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-Postgres%20%2B%20PostGIS-3ECF8E?logo=supabase&logoColor=white)
+![MapLibre](https://img.shields.io/badge/map-MapLibre%20GL-396cb2?logo=maplibre&logoColor=white)
+![PRs welcome](https://img.shields.io/badge/PRs-welcome-blueviolet)
+
 A community map of dangerous, unmarked speed breakers, with a discussion forum
 and a moderator workflow. Built to run on **$0/year** hosting.
 
@@ -10,6 +17,18 @@ and a moderator workflow. Built to run on **$0/year** hosting.
   account.
 - **Moderation** — `/admin` for moderators: approve/reject reports, confirm
   "painted" photos, handle flags, remove posts. Admins can also manage roles.
+
+## Screenshots
+
+| Public map | Report a speed breaker |
+|---|---|
+| [![Public map of reported speed breakers](docs/screenshots/map.png)](docs/screenshots/map.png) | [![Anonymous submission form with location picker](docs/screenshots/submit.png)](docs/screenshots/submit.png) |
+| **Passwordless sign-in** | **Community guidelines** |
+| [![Magic-link sign-in](docs/screenshots/login.png)](docs/screenshots/login.png) | [![Community guidelines page](docs/screenshots/guidelines.png)](docs/screenshots/guidelines.png) |
+
+On the live map each report is a coloured dot (orange/red by severity, green once
+painted) and nearby reports cluster together; the screenshot above was taken
+against an empty database.
 
 ## Stack
 
@@ -63,6 +82,8 @@ where id = (select id from auth.users where email = 'you@example.com');
 ```
 
 ## Deploy (Vercel)
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yash-seth/The-Black-and-Yellow-Initiative)
 
 1. Push this repo to GitHub.
 2. Import into Vercel. Add all the env vars from `.env.local`, plus

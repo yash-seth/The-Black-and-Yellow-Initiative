@@ -72,6 +72,7 @@ Legend: ✅ done · 🟡 partial · ⬜ not started
   offending content, bulk actions)
 - ⬜ Analytics (Vercel free / Plausible)
 - ✅ Content: `/about`, `/guidelines` pages
+- ✅ README screenshots (`docs/screenshots/`) + shields.io badges
 - ⬜ OG image for social sharing
 - ⬜ Accessibility pass (keyboard nav on map, ARIA on custom controls)
 - ⬜ Error boundaries + nicer empty/error states
