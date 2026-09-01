@@ -23,7 +23,7 @@ Three parts:
 | Map submissions | **Anonymous allowed**, no login | Lowest friction to report |
 | Submission visibility | Hidden until a **moderator approves** | Anonymous ⇒ abuse risk; keep the public map clean |
 | Forum posting | **Requires login** (passwordless magic-link) | Accountability for discussion |
-| Geographic scope | **One city/region at launch** | Keeps free-tier usage low; easier to moderate. Map center is configurable via env |
+| Geographic scope | **One city/region at launch — piloting in Hyderabad** | Keeps free-tier usage low; easier to moderate. Map center is set via `NEXT_PUBLIC_MAP_CENTER_*` (defaults to Hyderabad, 17.3850 / 78.4867) |
 | Budget | **$0/year** | Personal funding. `*.vercel.app` subdomain, all free tiers |
 | Forum structure | **Per-pin auto threads + global board** (Announcements / Successes / General) | Space for both specific follow-up and general community talk |
 | Paint verification | User uploads "after" photos → moderator confirms → pin turns green + auto-post in Successes | Closes the loop, motivates |

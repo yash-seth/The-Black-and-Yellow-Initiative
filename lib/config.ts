@@ -10,8 +10,9 @@ export const siteUrl =
 
 export const map = {
   center: [
-    num(process.env.NEXT_PUBLIC_MAP_CENTER_LNG, 77.5946),
-    num(process.env.NEXT_PUBLIC_MAP_CENTER_LAT, 12.9716),
+    // Default: Hyderabad (launch pilot city).
+    num(process.env.NEXT_PUBLIC_MAP_CENTER_LNG, 78.4867),
+    num(process.env.NEXT_PUBLIC_MAP_CENTER_LAT, 17.385),
   ] as [number, number],
   defaultZoom: num(process.env.NEXT_PUBLIC_MAP_DEFAULT_ZOOM, 12),
   styleUrl:
