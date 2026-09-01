@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+:root {
+  --by-yellow: #f5c518;
+  --by-black: #1a1a1a;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  background: #fafafa;
+  color: var(--by-black);
+  font-family:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #0f0f0f;
+    color: #ededed;
+  }
+}
+
+/* Hazard stripe used for headers / accents */
+.hazard-stripe {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--by-black) 0 16px,
+    var(--by-yellow) 16px 32px
+  );
+}
+
+.maplibregl-popup-content {
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+}
