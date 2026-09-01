@@ -27,7 +27,7 @@ Legend: ✅ done · 🟡 partial · ⬜ not started
   approve/reject (+reason)
 - ✅ `/api/health` keep-alive endpoint + `.github/workflows/keepalive.yml`
 - ✅ Verified: typecheck, production build, map renders in browser
-- ⬜ Deploy to Vercel + create the real Supabase project (owner action)
+- ⬜ Deploy to Vercel + create the real Supabase project (owner action — see `DEPLOY.md`)
 - 🟡 Sample data — `supabase/seed_sample.sql` (8 Hyderabad pins + forum posts),
   validated against Postgres via PGlite. Real curated launch data still to do.
 

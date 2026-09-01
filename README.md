@@ -89,11 +89,14 @@ where id = (select id from auth.users where email = 'you@example.com');
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yash-seth/The-Black-and-Yellow-Initiative)
 
-1. Push this repo to GitHub.
-2. Import into Vercel. Add all the env vars from `.env.local`, plus
-   `NEXT_PUBLIC_SITE_URL=https://<your-app>.vercel.app` and a random
-   `HEALTH_PING_SECRET`.
-3. Deploy. Update the Supabase redirect allow-list with the real URL.
+**Full step-by-step: [`DEPLOY.md`](DEPLOY.md).** In short:
+
+1. Create a free Supabase project; run `supabase/all_migrations.sql` in the SQL
+   editor (optionally `supabase/seed_sample.sql` too).
+2. Import this repo into Vercel; add the env vars (Supabase keys, the Hyderabad
+   map center, `NEXT_PUBLIC_SITE_URL`, a random `HEALTH_PING_SECRET`).
+3. Point Supabase Auth Site URL / redirect list at the Vercel URL.
+4. Add the `HEALTH_URL` GitHub repo secret for the keep-alive workflow.
 
 ### Keep the database awake
 
