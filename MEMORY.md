@@ -84,7 +84,7 @@ GitHub repo needs a `HEALTH_URL` secret for the keep-alive workflow.
 ## Key paths
 
 - Plan: `C:\Users\yashs\.claude\plans\i-intend-to-build-snuggly-blanket.md`
-- SQL: `supabase/migrations/0001_init.sql` → `0002_rls.sql` → `0003_storage_seed.sql` (run in order)
+- SQL: `supabase/migrations/0001_init.sql` → `0002_rls.sql` → `0003_storage_seed.sql` (run in order); optional `supabase/seed_sample.sql` for test data
 - Config / limits: `lib/config.ts`
 - Setup + deploy steps: `README.md`
 - Status: `BACKLOG.md`

@@ -62,6 +62,10 @@ against an empty database.
    npm install
    npm run dev
    ```
+5. _(optional)_ Load sample data for testing — 8 Hyderabad speed breakers
+   (2 already "painted") plus a few forum posts: run
+   `supabase/seed_sample.sql` in the SQL editor. It's re-runnable and tagged
+   `submitter_token = 'sample-seed'` for easy cleanup.
 
 ## Auth configuration (Supabase dashboard)
 

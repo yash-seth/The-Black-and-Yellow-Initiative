@@ -28,7 +28,8 @@ Legend: ✅ done · 🟡 partial · ⬜ not started
 - ✅ `/api/health` keep-alive endpoint + `.github/workflows/keepalive.yml`
 - ✅ Verified: typecheck, production build, map renders in browser
 - ⬜ Deploy to Vercel + create the real Supabase project (owner action)
-- ⬜ Seed a few real speed breakers for the launch city
+- 🟡 Sample data — `supabase/seed_sample.sql` (8 Hyderabad pins + forum posts),
+  validated against Postgres via PGlite. Real curated launch data still to do.
 
 ## Phase 2 — Auth + per-pin discussion
 
