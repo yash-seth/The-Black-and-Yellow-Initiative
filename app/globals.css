@@ -7,6 +7,8 @@
  * rules instead of shadows.
  * ------------------------------------------------------------------ */
 :root {
+  color-scheme: light;
+
   --by-yellow: #f5c518;
   --by-black: #1a1a1a;
 
@@ -23,6 +25,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    color-scheme: dark;
+
     --by-paper: #0e0e0e;
     --by-ink: #ededed;
     --by-muted: #9c9b95;
@@ -287,6 +291,20 @@ a.by-card:hover,
 
 .by-field::placeholder {
   color: var(--by-muted);
+}
+
+/* Native <select> popups ignore `background: transparent` and fall back to
+   the OS default (usually white), while the closed control keeps our (often
+   light-on-dark) text color — making the open option list unreadable. Give
+   selects and their options an explicit opaque background so the popup
+   matches the theme. */
+select.by-field {
+  background-color: var(--by-paper);
+}
+
+select.by-field option {
+  background-color: var(--by-paper);
+  color: var(--by-ink);
 }
 
 .by-field:focus,
