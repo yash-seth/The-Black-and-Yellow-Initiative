@@ -83,21 +83,24 @@ export function ThreadView({
   function Post({ p, nested }: { p: PostRow; nested?: boolean }) {
     const removed = p.status === "removed";
     return (
-      <div className={nested ? "ml-6 border-l border-black/10 dark:border-white/10 pl-3" : ""}>
-        <div className="py-2">
-          <div className="text-xs text-black/50 dark:text-white/50">
-            <span className="font-medium text-black/70 dark:text-white/70">
+      <div className={nested ? "ml-4 border-l-2 border-[color:var(--by-line)] pl-4" : ""}>
+        <div className="py-3">
+          <div className="text-xs by-muted">
+            <span className="font-semibold text-[color:var(--by-ink)] uppercase tracking-[0.04em]">
               {p.author?.display_name ?? "Removed user"}
             </span>{" "}
             · {timeAgo(p.created_at)}
           </div>
-          <p className="text-sm whitespace-pre-wrap mt-0.5">
+          <p className="text-sm whitespace-pre-wrap mt-1 leading-relaxed">
             {removed ? <em className="opacity-60">[removed by a moderator]</em> : p.body}
           </p>
           {!removed && (
-            <div className="flex gap-3 mt-1 text-xs text-black/50 dark:text-white/50">
+            <div className="flex gap-4 mt-1.5 text-xs by-muted">
               {userId && !locked && !nested && (
-                <button onClick={() => setReplyTo(replyTo === p.id ? null : p.id)}>
+                <button
+                  className="by-link decoration-transparent"
+                  onClick={() => setReplyTo(replyTo === p.id ? null : p.id)}
+                >
                   Reply
                 </button>
               )}
@@ -122,39 +125,37 @@ export function ThreadView({
 
   return (
     <section>
-      <h2 className="font-bold text-lg mb-2">Discussion</h2>
+      <p className="by-eyebrow mb-3">Discussion</p>
       {loading ? (
-        <p className="text-sm text-black/50">Loading…</p>
+        <p className="text-sm by-muted">Loading…</p>
       ) : roots.length === 0 ? (
-        <p className="text-sm text-black/50 dark:text-white/50">
-          No comments yet.
-        </p>
+        <p className="text-sm by-muted">No comments yet.</p>
       ) : (
-        <div className="divide-y divide-black/5 dark:divide-white/5">
+        <div className="border-t border-[color:var(--by-line)] divide-y divide-[color:var(--by-line)]">
           {roots.map((p) => (
             <Post key={p.id} p={p} />
           ))}
         </div>
       )}
 
-      {error && <p className="text-sm text-red-600 mt-2">{error}</p>}
+      {error && <p className="by-note by-note--error mt-3">{error}</p>}
 
       {locked ? (
-        <p className="mt-4 text-sm text-black/50">This thread is locked.</p>
+        <p className="mt-4 text-sm by-muted">This thread is locked.</p>
       ) : userId ? (
         replyTo === null && (
-          <form onSubmit={submit} className="mt-4 space-y-2">
+          <form onSubmit={submit} className="mt-5 space-y-3">
             <textarea
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
               rows={3}
               maxLength={5000}
               placeholder="Add a comment…"
-              className="w-full rounded border border-black/15 dark:border-white/15 bg-transparent px-3 py-2 text-sm"
+              className="by-field by-field--sm"
             />
             <button
               disabled={busy}
-              className="rounded-full bg-[color:var(--by-yellow)] text-black font-semibold px-4 py-1.5 text-sm disabled:opacity-50"
+              className="by-btn by-btn--accent by-btn--sm"
             >
               {busy ? "Posting…" : "Post comment"}
             </button>
@@ -162,7 +163,7 @@ export function ThreadView({
         )
       ) : (
         <p className="mt-4 text-sm">
-          <Link href="/login?next=" className="underline font-medium">
+          <Link href="/login?next=" className="by-link font-semibold">
             Sign in
           </Link>{" "}
           to join the discussion.
@@ -191,12 +192,9 @@ function ReplyBox({
         rows={2}
         maxLength={5000}
         placeholder="Write a reply…"
-        className="w-full rounded border border-black/15 dark:border-white/15 bg-transparent px-3 py-2 text-sm"
+        className="by-field by-field--sm"
       />
-      <button
-        disabled={busy}
-        className="rounded-full bg-[color:var(--by-yellow)] text-black font-semibold px-3 py-1 text-xs disabled:opacity-50"
-      >
+      <button disabled={busy} className="by-btn by-btn--accent by-btn--sm">
         {busy ? "Posting…" : "Reply"}
       </button>
     </form>

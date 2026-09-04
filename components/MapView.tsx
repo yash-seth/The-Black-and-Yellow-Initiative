@@ -151,7 +151,7 @@ export function MapView() {
         const id = feature.properties?.id as string;
         const [lng, lat] = (feature.geometry as GeoJSON.Point).coordinates;
         const node = document.createElement("div");
-        node.innerHTML = `<a href="/pin/${id}" style="font-weight:600;color:#1a1a1a">View this report →</a>`;
+        node.innerHTML = `<a href="/pin/${id}" style="font-weight:700;color:#1a1a1a;text-transform:uppercase;letter-spacing:0.04em;font-size:12px">View this report →</a>`;
         new maplibregl.Popup({ closeButton: true })
           .setLngLat([lng, lat])
           .setDOMContent(node)
@@ -188,12 +188,12 @@ export function MapView() {
 
       <Link
         href="/submit"
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 rounded-full bg-[color:var(--by-yellow)] text-black font-bold px-6 py-3 shadow-lg shadow-black/30 hover:brightness-95"
+        className="by-btn by-btn--accent absolute bottom-[calc(1.5rem+env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 z-10"
       >
         ＋ Report a speed breaker
       </Link>
 
-      <div className="absolute top-3 left-3 z-10 rounded bg-white/90 dark:bg-black/80 px-3 py-1.5 text-xs font-medium shadow">
+      <div className="absolute top-3 left-3 z-10 by-chip bg-[color:var(--by-paper)]">
         {error
           ? error
           : count === null

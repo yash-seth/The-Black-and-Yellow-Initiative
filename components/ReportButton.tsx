@@ -25,34 +25,34 @@ export function ReportButton({
   }
 
   if (state === "done")
-    return <span className="text-xs text-black/40">Reported — thank you</span>;
+    return <span className="text-xs by-muted">Reported — thank you</span>;
 
   return (
     <span className="inline">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="text-xs text-black/40 dark:text-white/40 hover:text-red-600"
+        className="text-xs by-muted uppercase tracking-[0.04em] hover:text-[color:var(--by-error)]"
       >
         Report
       </button>
       {open && (
-        <span className="ml-2 inline-flex items-center gap-1">
+        <span className="ml-2 inline-flex items-center gap-1.5">
           <input
             value={reason}
             onChange={(e) => setReason(e.target.value)}
             placeholder="Reason"
             maxLength={1000}
-            className="rounded border border-black/15 px-2 py-0.5 text-xs bg-transparent"
+            className="by-field by-field--sm w-40 min-h-0"
           />
           <button
             onClick={send}
             disabled={state === "busy" || reason.trim().length < 3}
-            className="rounded bg-black/10 px-2 py-0.5 text-xs disabled:opacity-40"
+            className="by-btn by-btn--ghost by-btn--sm disabled:opacity-40"
           >
             Send
           </button>
           {state === "error" && (
-            <span className="text-xs text-red-600">failed</span>
+            <span className="text-xs text-[color:var(--by-error)]">failed</span>
           )}
         </span>
       )}

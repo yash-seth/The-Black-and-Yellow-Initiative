@@ -8,7 +8,7 @@ export default function manifest(): MetadataRoute.Manifest {
       "Map dangerous, unmarked speed breakers and help get them painted.",
     start_url: "/",
     display: "standalone",
-    background_color: "#fafafa",
+    background_color: "#f7f6f2",
     theme_color: "#f5c518",
     icons: [
       { src: "/icon.svg", sizes: "any", type: "image/svg+xml" },

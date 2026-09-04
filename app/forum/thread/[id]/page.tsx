@@ -41,24 +41,26 @@ export default async function ThreadPage({
   } | null;
 
   return (
-    <div className="mx-auto max-w-2xl w-full px-4 py-8 space-y-6">
+    <div className="mx-auto max-w-2xl w-full px-4 py-10 space-y-6">
       <Link
         href={category ? `/forum/${category.slug}` : "/forum"}
-        className="text-sm underline"
+        className="by-link text-sm by-muted"
       >
         ← {category?.name ?? "Forum"}
       </Link>
 
-      <h1 className="text-2xl font-extrabold">{thread.title}</h1>
+      <h1 className="by-title text-2xl sm:text-3xl">{thread.title}</h1>
 
       {thread.speed_breaker_id && (
         <Link
           href={`/pin/${thread.speed_breaker_id}`}
-          className="inline-block text-sm underline"
+          className="inline-block text-sm by-link"
         >
           View the speed breaker on the map →
         </Link>
       )}
+      <hr className="by-rule" />
+
 
       <ThreadView
         threadId={thread.id}

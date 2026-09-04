@@ -36,48 +36,63 @@ export default async function ForumPage() {
   const threads = (recent as unknown as RecentThread[]) ?? [];
 
   return (
-    <div className="mx-auto max-w-3xl w-full px-4 py-8 space-y-8">
-      <h1 className="text-2xl font-extrabold">Forum</h1>
+    <div className="mx-auto max-w-3xl w-full px-4 py-10 space-y-10">
+      <div>
+        <p className="by-eyebrow mb-4">Discussion</p>
+        <h1 className="by-title text-3xl sm:text-4xl">Forum</h1>
+        <hr className="by-rule mt-6" />
+      </div>
 
-      <div className="space-y-3">
+      <div className="border-t border-[color:var(--by-line)]">
         {categories.map((c) => (
           <Link
             key={c.id}
             href={`/forum/${c.slug}`}
-            className="block rounded-lg border border-black/10 dark:border-white/10 p-4 hover:border-[color:var(--by-yellow)]"
+            className="by-card--link group flex items-baseline justify-between gap-4 border-b border-[color:var(--by-line)] py-4"
           >
-            <div className="font-bold">{c.name}</div>
-            {c.description && (
-              <div className="text-sm text-black/60 dark:text-white/60">
-                {c.description}
-              </div>
-            )}
+            <div>
+              <div className="by-title text-lg">{c.name}</div>
+              {c.description && (
+                <div className="text-sm by-muted mt-0.5">{c.description}</div>
+              )}
+            </div>
+            <span
+              aria-hidden
+              className="by-muted transition-transform group-hover:translate-x-1"
+            >
+              →
+            </span>
           </Link>
         ))}
       </div>
 
       <div>
-        <h2 className="font-bold mb-2">Recent activity</h2>
-        <ul className="divide-y divide-black/5 dark:divide-white/5">
+        <p className="by-eyebrow mb-3">Recent activity</p>
+        <ul className="border-t border-[color:var(--by-line)]">
           {threads.map((t) => (
-            <li key={t.id} className="py-2 text-sm flex justify-between gap-3">
+            <li
+              key={t.id}
+              className="py-2.5 text-sm flex justify-between gap-3 border-b border-[color:var(--by-line)]"
+            >
               <Link
                 href={
                   t.speed_breaker_id
                     ? `/pin/${t.speed_breaker_id}`
                     : `/forum/thread/${t.id}`
                 }
-                className="hover:underline"
+                className="by-link decoration-transparent"
               >
                 {t.title}
               </Link>
-              <span className="text-black/40 dark:text-white/40 shrink-0">
+              <span className="by-muted shrink-0 text-xs uppercase tracking-[0.04em]">
                 {t.category?.name ?? "Speed breaker"}
               </span>
             </li>
           ))}
           {threads.length === 0 && (
-            <li className="py-2 text-sm text-black/50">Nothing here yet.</li>
+            <li className="py-2.5 text-sm by-muted border-b border-[color:var(--by-line)]">
+              Nothing here yet.
+            </li>
           )}
         </ul>
       </div>

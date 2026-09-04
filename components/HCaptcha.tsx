@@ -59,7 +59,7 @@ export function HCaptcha({
 
   if (!hcaptcha.enabled) {
     return (
-      <p className="text-xs text-black/50 dark:text-white/50">
+      <p className="text-xs by-muted">
         Captcha disabled (no key configured).
       </p>
     );

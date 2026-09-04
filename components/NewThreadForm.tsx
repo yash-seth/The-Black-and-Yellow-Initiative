@@ -63,7 +63,7 @@ export function NewThreadForm({
   if (!userId)
     return (
       <p className="text-sm">
-        <Link href="/login" className="underline font-medium">
+        <Link href="/login" className="by-link font-semibold">
           Sign in
         </Link>{" "}
         to start a thread.
@@ -71,13 +71,13 @@ export function NewThreadForm({
     );
 
   return (
-    <form onSubmit={submit} className="space-y-2">
+    <form onSubmit={submit} className="space-y-3">
       <input
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Thread title"
         maxLength={200}
-        className="w-full rounded border border-black/15 dark:border-white/15 bg-transparent px-3 py-2 text-sm"
+        className="by-field by-field--sm"
       />
       <textarea
         value={body}
@@ -85,13 +85,10 @@ export function NewThreadForm({
         placeholder="Write your first post…"
         rows={4}
         maxLength={5000}
-        className="w-full rounded border border-black/15 dark:border-white/15 bg-transparent px-3 py-2 text-sm"
+        className="by-field by-field--sm"
       />
-      {error && <p className="text-sm text-red-600">{error}</p>}
-      <button
-        disabled={busy}
-        className="rounded-full bg-[color:var(--by-yellow)] text-black font-semibold px-4 py-1.5 text-sm disabled:opacity-50"
-      >
+      {error && <p className="by-note by-note--error">{error}</p>}
+      <button disabled={busy} className="by-btn by-btn--accent by-btn--sm">
         {busy ? "Posting…" : "Create thread"}
       </button>
     </form>

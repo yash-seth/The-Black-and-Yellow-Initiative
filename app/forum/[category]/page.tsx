@@ -50,42 +50,44 @@ export default async function CategoryPage({
   const threads = (threadRows as ThreadRow[]) ?? [];
 
   return (
-    <div className="mx-auto max-w-3xl w-full px-4 py-8 space-y-6">
-      <Link href="/forum" className="text-sm underline">
+    <div className="mx-auto max-w-3xl w-full px-4 py-10 space-y-8">
+      <Link href="/forum" className="by-link text-sm by-muted">
         ← All categories
       </Link>
       <div>
-        <h1 className="text-2xl font-extrabold">{cat.name}</h1>
+        <h1 className="by-title text-3xl sm:text-4xl">{cat.name}</h1>
         {cat.description && (
-          <p className="text-sm text-black/60 dark:text-white/60">
-            {cat.description}
-          </p>
+          <p className="text-sm by-muted mt-1">{cat.description}</p>
         )}
+        <hr className="by-rule mt-6" />
       </div>
 
-      <ul className="divide-y divide-black/5 dark:divide-white/5">
+      <ul className="border-t border-[color:var(--by-line)]">
         {threads.map((t) => (
-          <li key={t.id} className="py-2">
+          <li
+            key={t.id}
+            className="py-3 border-b border-[color:var(--by-line)]"
+          >
             <Link
               href={`/forum/thread/${t.id}`}
-              className="text-sm font-medium hover:underline"
+              className="text-sm font-semibold by-link decoration-transparent"
             >
               {t.title}
             </Link>
-            <div className="text-xs text-black/40 dark:text-white/40">
+            <div className="text-xs by-muted mt-0.5">
               last activity {new Date(t.last_post_at).toLocaleString()}
             </div>
           </li>
         ))}
         {threads.length === 0 && (
-          <li className="py-2 text-sm text-black/50">
+          <li className="py-3 text-sm by-muted border-b border-[color:var(--by-line)]">
             No threads yet — start one below.
           </li>
         )}
       </ul>
 
-      <div className="rounded-lg border border-black/10 dark:border-white/10 p-4">
-        <h2 className="font-bold mb-2">Start a thread</h2>
+      <div className="by-card p-5">
+        <p className="by-eyebrow mb-3">Start a thread</p>
         <NewThreadForm categoryId={cat.id} categorySlug={cat.slug} />
       </div>
     </div>

@@ -31,28 +31,24 @@ export function LoginForm() {
 
   if (sent) {
     return (
-      <p className="rounded border border-green-600/30 bg-green-50 dark:bg-green-950/40 p-4 text-sm">
+      <p className="by-note by-note--ok">
         Check <strong>{email}</strong> for a sign-in link. You can close this tab.
       </p>
     );
   }
 
   return (
-    <form onSubmit={submit} className="space-y-3">
+    <form onSubmit={submit} className="space-y-4">
       <input
         type="email"
         required
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="you@example.com"
-        className="w-full rounded border border-black/15 dark:border-white/15 bg-transparent px-3 py-2"
+        className="by-field"
       />
-      {error && <p className="text-sm text-red-600">{error}</p>}
-      <button
-        type="submit"
-        disabled={busy}
-        className="rounded-full bg-[color:var(--by-yellow)] text-black font-bold px-6 py-2.5 disabled:opacity-50"
-      >
+      {error && <p className="by-note by-note--error">{error}</p>}
+      <button type="submit" disabled={busy} className="by-btn by-btn--accent">
         {busy ? "Sending…" : "Email me a link"}
       </button>
     </form>

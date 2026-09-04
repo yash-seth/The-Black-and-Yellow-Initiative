@@ -71,20 +71,18 @@ export default async function PinPage({
   const painted = sb.paint_state === "marked";
 
   return (
-    <div className="mx-auto max-w-2xl w-full px-4 py-8 space-y-6">
-      <Link href="/" className="text-sm underline">
+    <div className="mx-auto max-w-2xl w-full px-4 py-10 space-y-6">
+      <Link href="/" className="by-link text-sm by-muted">
         ← Back to the map
       </Link>
 
       <div className="flex items-start justify-between gap-4">
-        <h1 className="text-2xl font-extrabold">
+        <h1 className="by-title text-2xl sm:text-3xl">
           {sb.landmark || "Speed breaker report"}
         </h1>
         <span
-          className={`shrink-0 rounded-full px-3 py-1 text-xs font-bold ${
-            painted
-              ? "bg-green-600 text-white"
-              : "hazard-stripe text-white"
+          className={`shrink-0 by-chip ${
+            painted ? "by-chip--ok" : "by-chip--hazard"
           }`}
         >
           {painted ? "Painted ✓" : "Needs painting"}
@@ -92,40 +90,48 @@ export default async function PinPage({
       </div>
 
       {sb.status !== "approved" && (
-        <p className="rounded border border-amber-500/40 bg-amber-50 dark:bg-amber-950/40 p-3 text-sm">
+        <p className="by-note by-note--warn">
           This report is <strong>{sb.status}</strong> and not yet public.
         </p>
       )}
 
-      <dl className="grid grid-cols-3 gap-2 text-sm">
-        <div>
-          <dt className="text-black/50 dark:text-white/50">Severity</dt>
-          <dd className="font-medium">{SEVERITY_LABEL[sb.severity]}</dd>
+      <dl className="grid grid-cols-3 gap-3 text-sm">
+        <div className="border-t-2 border-[color:var(--by-line-strong)] pt-2">
+          <dt className="text-[11px] font-bold uppercase tracking-[0.1em] by-muted mb-1">
+            Severity
+          </dt>
+          <dd className="font-semibold">{SEVERITY_LABEL[sb.severity]}</dd>
         </div>
-        <div>
-          <dt className="text-black/50 dark:text-white/50">Reported</dt>
-          <dd className="font-medium">
+        <div className="border-t-2 border-[color:var(--by-line-strong)] pt-2">
+          <dt className="text-[11px] font-bold uppercase tracking-[0.1em] by-muted mb-1">
+            Reported
+          </dt>
+          <dd className="font-semibold">
             {new Date(sb.created_at).toLocaleDateString()}
           </dd>
         </div>
-        <div>
-          <dt className="text-black/50 dark:text-white/50">Coordinates</dt>
-          <dd className="font-medium">
+        <div className="border-t-2 border-[color:var(--by-line-strong)] pt-2">
+          <dt className="text-[11px] font-bold uppercase tracking-[0.1em] by-muted mb-1">
+            Coordinates
+          </dt>
+          <dd className="font-semibold tabular-nums">
             {sb.lat.toFixed(5)}, {sb.lng.toFixed(5)}
           </dd>
         </div>
       </dl>
 
       {sb.description && (
-        <p className="text-sm whitespace-pre-wrap">{sb.description}</p>
+        <p className="text-sm whitespace-pre-wrap leading-relaxed">
+          {sb.description}
+        </p>
       )}
 
-      <div className="flex gap-3 text-sm">
+      <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm items-center">
         <a
           href={`https://www.openstreetmap.org/?mlat=${sb.lat}&mlon=${sb.lng}#map=18/${sb.lat}/${sb.lng}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="underline"
+          className="by-link"
         >
           Open in OpenStreetMap
         </a>
@@ -133,7 +139,7 @@ export default async function PinPage({
           href={`https://www.google.com/maps/search/?api=1&query=${sb.lat},${sb.lng}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="underline"
+          className="by-link"
         >
           Open in Google Maps
         </a>
@@ -142,7 +148,7 @@ export default async function PinPage({
 
       {reportPhotos.length > 0 && (
         <div>
-          <h2 className="font-bold mb-2">Photos</h2>
+          <p className="by-eyebrow mb-3">Photos</p>
           <div className="grid grid-cols-2 gap-2">
             {reportPhotos.map((p) => (
               // eslint-disable-next-line @next/next/no-img-element
@@ -150,7 +156,7 @@ export default async function PinPage({
                 key={p.id}
                 alt="Speed breaker"
                 src={photoUrl(p.storage_path)}
-                className="w-full rounded-lg object-cover aspect-4/3"
+                className="w-full object-cover aspect-4/3 border border-[color:var(--by-line)]"
               />
             ))}
           </div>
@@ -159,9 +165,9 @@ export default async function PinPage({
 
       {afterPhotos.length > 0 && (
         <div>
-          <h2 className="font-bold mb-2 text-green-700 dark:text-green-400">
+          <p className="by-eyebrow mb-3" style={{ color: "var(--by-ok)" }}>
             After painting
-          </h2>
+          </p>
           <div className="grid grid-cols-2 gap-2">
             {afterPhotos.map((p) => (
               // eslint-disable-next-line @next/next/no-img-element
@@ -169,7 +175,7 @@ export default async function PinPage({
                 key={p.id}
                 alt="Speed breaker after painting"
                 src={photoUrl(p.storage_path)}
-                className="w-full rounded-lg object-cover aspect-4/3"
+                className="w-full object-cover aspect-4/3 border border-[color:var(--by-line)]"
               />
             ))}
           </div>
@@ -177,9 +183,9 @@ export default async function PinPage({
       )}
 
       {sb.status === "approved" && !painted && (
-        <div className="rounded-lg border border-black/10 dark:border-white/10 p-4">
-          <h2 className="font-bold mb-1">Has this been painted?</h2>
-          <p className="text-sm text-black/60 dark:text-white/60 mb-3">
+        <div className="by-card p-5">
+          <p className="by-eyebrow mb-2">Has this been painted?</p>
+          <p className="text-sm by-muted mb-4">
             If you&apos;ve seen this speed breaker painted in black and yellow,
             upload photos and a moderator will confirm it.
           </p>
@@ -187,10 +193,12 @@ export default async function PinPage({
         </div>
       )}
 
+      <hr className="by-rule" />
+
       {thread && thread.status !== "removed" ? (
         <ThreadView threadId={thread.id} locked={thread.status === "locked"} />
       ) : (
-        <p className="text-sm text-black/50">
+        <p className="text-sm by-muted">
           Discussion opens once this report is approved.
         </p>
       )}

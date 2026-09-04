@@ -86,15 +86,15 @@ export function PinForm() {
 
   if (doneId) {
     return (
-      <div className="rounded-lg border border-green-600/30 bg-green-50 dark:bg-green-950/40 p-6 space-y-3">
-        <h2 className="font-bold text-lg">Thank you 🙏</h2>
-        <p className="text-sm">
+      <div className="by-note by-note--ok p-6 space-y-3">
+        <h2 className="by-title text-lg">Thank you 🙏</h2>
+        <p className="text-sm leading-relaxed">
           Your report has been submitted and is now waiting for a moderator to
           review it. Once approved it will appear on the public map with its own
           discussion thread.
         </p>
-        <div className="flex gap-3 text-sm font-medium">
-          <Link href="/" className="underline">
+        <div className="flex gap-4 text-sm font-semibold">
+          <Link href="/" className="by-link">
             Back to the map
           </Link>
           <button
@@ -106,7 +106,7 @@ export function PinForm() {
               setPhotos([]);
               setCaptcha(null);
             }}
-            className="underline"
+            className="by-link"
           >
             Report another
           </button>
@@ -116,14 +116,14 @@ export function PinForm() {
   }
 
   return (
-    <form onSubmit={submit} className="space-y-6">
+    <form onSubmit={submit} className="space-y-7">
       <div>
-        <label className="block font-semibold mb-1">Location *</label>
+        <label className="by-label">Location *</label>
         <LocationPicker value={loc} onChange={setLoc} />
       </div>
 
       <div>
-        <label htmlFor="landmark" className="block font-semibold mb-1">
+        <label htmlFor="landmark" className="by-label">
           Nearest landmark
         </label>
         <input
@@ -132,12 +132,12 @@ export function PinForm() {
           onChange={(e) => setLandmark(e.target.value)}
           maxLength={200}
           placeholder="e.g. Opposite City Hospital gate"
-          className="w-full rounded border border-black/15 dark:border-white/15 bg-transparent px-3 py-2"
+          className="by-field"
         />
       </div>
 
       <div>
-        <label htmlFor="description" className="block font-semibold mb-1">
+        <label htmlFor="description" className="by-label">
           What makes it dangerous?
         </label>
         <textarea
@@ -147,19 +147,19 @@ export function PinForm() {
           maxLength={2000}
           rows={3}
           placeholder="Unmarked, no warning sign, very steep, bad at night…"
-          className="w-full rounded border border-black/15 dark:border-white/15 bg-transparent px-3 py-2"
+          className="by-field"
         />
       </div>
 
       <div>
-        <label htmlFor="severity" className="block font-semibold mb-1">
+        <label htmlFor="severity" className="by-label">
           Severity
         </label>
         <select
           id="severity"
           value={severity}
           onChange={(e) => setSeverity(e.target.value as Severity)}
-          className="rounded border border-black/15 dark:border-white/15 bg-transparent px-3 py-2"
+          className="by-field"
         >
           <option value="low">Low — mild jolt</option>
           <option value="medium">Medium — clearly hazardous</option>
@@ -168,7 +168,7 @@ export function PinForm() {
       </div>
 
       <div>
-        <label className="block font-semibold mb-1">
+        <label className="by-label">
           Photos * (up to {MAX_PHOTOS})
         </label>
         <input
@@ -177,7 +177,7 @@ export function PinForm() {
           capture="environment"
           multiple
           onChange={(e) => addFiles(e.target.files)}
-          className="block text-sm"
+          className="by-file block text-sm"
         />
         {photos.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-2">
@@ -187,14 +187,14 @@ export function PinForm() {
                 <img
                   alt={`Photo ${i + 1}`}
                   src={URL.createObjectURL(p)}
-                  className="h-20 w-20 object-cover rounded border border-black/10"
+                  className="h-20 w-20 object-cover border border-[color:var(--by-line-strong)]"
                 />
                 <button
                   type="button"
                   onClick={() =>
                     setPhotos((arr) => arr.filter((_, j) => j !== i))
                   }
-                  className="absolute -top-2 -right-2 bg-black text-white rounded-full w-5 h-5 text-xs"
+                  className="absolute -top-2 -right-2 bg-[color:var(--by-black)] text-white w-5 h-5 text-xs leading-none"
                   aria-label="Remove photo"
                 >
                   ×
@@ -203,21 +203,19 @@ export function PinForm() {
             ))}
           </div>
         )}
-        <p className="mt-1 text-xs text-black/50 dark:text-white/50">
+        <p className="mt-2 text-xs by-muted">
           Photos are resized and stripped of location metadata before upload.
         </p>
       </div>
 
       <HCaptcha onVerify={onVerify} />
 
-      {error && (
-        <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
-      )}
+      {error && <p className="by-note by-note--error">{error}</p>}
 
       <button
         type="submit"
         disabled={busy}
-        className="rounded-full bg-[color:var(--by-yellow)] text-black font-bold px-6 py-3 disabled:opacity-50"
+        className="by-btn by-btn--accent"
       >
         {busy ? "Submitting…" : "Submit report"}
       </button>

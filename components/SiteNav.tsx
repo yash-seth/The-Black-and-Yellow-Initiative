@@ -48,31 +48,28 @@ export function SiteNav() {
   }
 
   return (
-    <nav className="flex items-center gap-4 text-sm font-medium">
-      <Link href="/submit" className="hover:underline">
+    <nav className="flex items-center gap-3 sm:gap-5 text-[13px] font-semibold uppercase tracking-[0.04em]">
+      <Link href="/submit" className="by-link decoration-transparent">
         Report
       </Link>
-      <Link href="/forum" className="hover:underline">
+      <Link href="/forum" className="by-link decoration-transparent">
         Forum
       </Link>
       {(role === "moderator" || role === "admin") && (
-        <Link href="/admin" className="hover:underline">
+        <Link href="/admin" className="by-link decoration-transparent">
           Admin
         </Link>
       )}
       {email ? (
         <button
           onClick={signOut}
-          className="rounded bg-black/10 dark:bg-white/10 px-3 py-1 hover:bg-black/20"
+          className="by-btn by-btn--ghost by-btn--sm"
           title={email}
         >
           Sign out
         </button>
       ) : (
-        <Link
-          href="/login"
-          className="rounded bg-[color:var(--by-yellow)] text-black px-3 py-1 font-semibold"
-        >
+        <Link href="/login" className="by-btn by-btn--accent by-btn--sm">
           Sign in
         </Link>
       )}

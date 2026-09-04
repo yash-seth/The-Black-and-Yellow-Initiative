@@ -28,29 +28,41 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen flex flex-col">
-        <header className="hazard-stripe">
-          <div className="bg-white/90 dark:bg-black/80 backdrop-blur">
-            <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-4">
-              <Link href="/" className="font-extrabold tracking-tight text-lg">
-                Black <span className="text-[color:var(--by-yellow)]">&amp;</span>{" "}
+        <header className="by-header">
+          <div className="mx-auto max-w-6xl px-4 min-h-14 py-2 flex items-center justify-between gap-3">
+            <Link
+              href="/"
+              className="flex items-center gap-2.5 font-extrabold tracking-tight shrink-0"
+            >
+              <span aria-hidden className="by-mark">
+                B
+              </span>
+              <span className="hidden min-[420px]:inline text-sm sm:text-[15px] uppercase tracking-[0.04em] leading-none whitespace-nowrap">
+                Black{" "}
+                <span className="text-[color:var(--by-yellow)]">&amp;</span>{" "}
                 Yellow
-              </Link>
-              <SiteNav />
-            </div>
+              </span>
+            </Link>
+            <SiteNav />
           </div>
+          <div className="hazard-stripe h-1" aria-hidden />
         </header>
 
         <main className="flex-1 flex flex-col">{children}</main>
 
-        <footer className="border-t border-black/10 dark:border-white/10 text-xs text-black/60 dark:text-white/60">
+        <footer className="by-footer text-xs">
           <div className="mx-auto max-w-6xl px-4 py-6 flex flex-wrap gap-x-6 gap-y-2 justify-between">
             <span>
               A non-profit community project. Report data is public and
               crowd-sourced.
             </span>
             <span className="flex gap-4">
-              <Link href="/about">About</Link>
-              <Link href="/guidelines">Guidelines</Link>
+              <Link href="/about" className="by-link">
+                About
+              </Link>
+              <Link href="/guidelines" className="by-link">
+                Guidelines
+              </Link>
             </span>
           </div>
         </footer>

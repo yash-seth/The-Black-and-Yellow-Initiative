@@ -48,7 +48,7 @@ export function AfterPhotoUpload({ speedBreakerId }: { speedBreakerId: string })
 
   if (state === "done")
     return (
-      <p className="text-sm rounded border border-green-600/30 bg-green-50 dark:bg-green-950/40 p-3">
+      <p className="by-note by-note--ok">
         Thanks! Your &ldquo;after&rdquo; photos are pending moderator review. If
         confirmed, this speed breaker will be marked as painted.
       </p>
@@ -57,7 +57,7 @@ export function AfterPhotoUpload({ speedBreakerId }: { speedBreakerId: string })
   if (!signedIn)
     return (
       <p className="text-sm">
-        <Link href="/login" className="underline font-medium">
+        <Link href="/login" className="by-link font-semibold">
           Sign in
         </Link>{" "}
         to upload photos showing this speed breaker has been painted.
@@ -65,14 +65,14 @@ export function AfterPhotoUpload({ speedBreakerId }: { speedBreakerId: string })
     );
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-3">
       <input
         type="file"
         accept="image/*"
         capture="environment"
         multiple
         onChange={(e) => add(e.target.files)}
-        className="block text-sm"
+        className="by-file block text-sm"
       />
       {files.length > 0 && (
         <div className="flex flex-wrap gap-2">
@@ -82,7 +82,7 @@ export function AfterPhotoUpload({ speedBreakerId }: { speedBreakerId: string })
               key={i}
               alt=""
               src={URL.createObjectURL(f)}
-              className="h-16 w-16 object-cover rounded"
+              className="h-16 w-16 object-cover border border-[color:var(--by-line)]"
             />
           ))}
         </div>
@@ -90,11 +90,11 @@ export function AfterPhotoUpload({ speedBreakerId }: { speedBreakerId: string })
       <button
         onClick={submit}
         disabled={state === "busy" || files.length === 0}
-        className="rounded-full bg-[color:var(--by-yellow)] text-black font-semibold px-4 py-1.5 text-sm disabled:opacity-50"
+        className="by-btn by-btn--accent by-btn--sm"
       >
         {state === "busy" ? "Uploading…" : "Submit “after” photos"}
       </button>
-      {msg && <p className="text-sm text-red-600">{msg}</p>}
+      {msg && <p className="by-note by-note--error">{msg}</p>}
     </div>
   );
 }

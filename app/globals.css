@@ -1,8 +1,38 @@
 @import "tailwindcss";
 
+/* ------------------------------------------------------------------ *
+ * Design tokens
+ * Editorial / road-sign system: paper ground, near-black ink, one
+ * saturated hazard accent (yellow on black). Sharp corners, hairline
+ * rules instead of shadows.
+ * ------------------------------------------------------------------ */
 :root {
   --by-yellow: #f5c518;
   --by-black: #1a1a1a;
+
+  --by-paper: #f7f6f2;
+  --by-ink: #171717;
+  --by-muted: #57564f;
+  --by-line: rgba(23, 23, 23, 0.16);
+  --by-line-strong: #171717;
+
+  --by-ok: #15803d;
+  --by-warn: #b45309;
+  --by-error: #dc2626;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --by-paper: #0e0e0e;
+    --by-ink: #ededed;
+    --by-muted: #9c9b95;
+    --by-line: rgba(255, 255, 255, 0.16);
+    --by-line-strong: #ededed;
+
+    --by-ok: #4ade80;
+    --by-warn: #fbbf24;
+    --by-error: #f87171;
+  }
 }
 
 html,
@@ -12,21 +42,34 @@ body {
 }
 
 body {
-  background: #fafafa;
-  color: var(--by-black);
+  background-color: var(--by-paper);
+  /* faint diagonal paper texture, light mode only */
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(23, 23, 23, 0.015) 0 1px,
+    transparent 1px 7px
+  );
+  color: var(--by-ink);
   font-family:
     ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 @media (prefers-color-scheme: dark) {
   body {
-    background: #0f0f0f;
-    color: #ededed;
+    background-image: none;
   }
 }
 
-/* Hazard stripe used for headers / accents */
+::selection {
+  background: var(--by-yellow);
+  color: #1a1a1a;
+}
+
+/* ------------------------------------------------------------------ *
+ * Brand accent — the hazard stripe stays the identity
+ * ------------------------------------------------------------------ */
 .hazard-stripe {
   background-image: repeating-linear-gradient(
     45deg,
@@ -35,7 +78,382 @@ body {
   );
 }
 
+/* ------------------------------------------------------------------ *
+ * Furniture
+ * ------------------------------------------------------------------ */
+.by-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background-color: color-mix(in srgb, var(--by-paper) 90%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 2px solid var(--by-line-strong);
+  padding-top: env(safe-area-inset-top);
+}
+
+.by-footer {
+  border-top: 2px solid var(--by-line-strong);
+  color: var(--by-muted);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.by-mark {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  background: var(--by-black);
+  color: var(--by-yellow);
+  font-weight: 900;
+  font-size: 0.9rem;
+  line-height: 1;
+  flex: none;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--by-yellow) 55%, transparent);
+}
+
+/* ------------------------------------------------------------------ *
+ * Eyebrow / kicker labels
+ * ------------------------------------------------------------------ */
+.by-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--by-ink);
+}
+
+.by-eyebrow::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  background: currentColor;
+  flex: none;
+}
+
+.by-eyebrow--box {
+  border: 1px solid var(--by-line-strong);
+  padding: 0.4rem 0.7rem;
+}
+
+/* ------------------------------------------------------------------ *
+ * Type helpers
+ * ------------------------------------------------------------------ */
+.by-display {
+  font-weight: 800;
+  letter-spacing: -0.022em;
+  line-height: 1.02;
+}
+
+.by-title {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+
+.by-muted {
+  color: var(--by-muted);
+}
+
+.by-accent-word {
+  font-style: italic;
+  color: var(--by-yellow);
+}
+
+/* ------------------------------------------------------------------ *
+ * Rules
+ * ------------------------------------------------------------------ */
+.by-rule {
+  border: 0;
+  border-top: 2px solid var(--by-line-strong);
+}
+
+.by-hair {
+  border: 0;
+  border-top: 1px solid var(--by-line);
+}
+
+/* ------------------------------------------------------------------ *
+ * Surfaces
+ * ------------------------------------------------------------------ */
+.by-card {
+  border: 1px solid var(--by-line);
+  background: transparent;
+}
+
+a.by-card,
+.by-card--link {
+  transition: border-color 0.12s ease, background-color 0.12s ease;
+}
+
+a.by-card:hover,
+.by-card--link:hover {
+  border-color: var(--by-line-strong);
+}
+
+.by-grid-panel {
+  background-color: color-mix(in srgb, var(--by-ink) 4%, var(--by-paper));
+  background-image:
+    linear-gradient(var(--by-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--by-line) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* ------------------------------------------------------------------ *
+ * Buttons
+ * ------------------------------------------------------------------ */
+.by-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid transparent;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.12s ease, color 0.12s ease, filter 0.12s ease;
+}
+
+.by-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.by-btn--primary {
+  background: var(--by-ink);
+  color: var(--by-paper);
+  border-color: var(--by-ink);
+}
+
+.by-btn--accent {
+  background: var(--by-yellow);
+  color: #1a1a1a;
+  border-color: #1a1a1a;
+}
+
+.by-btn--accent:hover:not(:disabled) {
+  filter: brightness(0.95);
+}
+
+.by-btn--ghost {
+  background: transparent;
+  color: var(--by-ink);
+  border-color: var(--by-line-strong);
+}
+
+.by-btn--ghost:hover:not(:disabled) {
+  background: var(--by-ink);
+  color: var(--by-paper);
+}
+
+.by-btn--sm {
+  min-height: 36px;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.75rem;
+}
+
+/* ------------------------------------------------------------------ *
+ * Forms
+ * ------------------------------------------------------------------ */
+.by-label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+  color: var(--by-ink);
+}
+
+.by-field {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--by-line-strong);
+  background: transparent;
+  color: var(--by-ink);
+  font-size: 0.9375rem;
+  border-radius: 0;
+  appearance: none;
+}
+
+.by-field::placeholder {
+  color: var(--by-muted);
+}
+
+.by-field:focus,
+.by-field:focus-visible {
+  outline: 2px solid var(--by-yellow);
+  outline-offset: -1px;
+}
+
+textarea.by-field {
+  min-height: 5rem;
+  line-height: 1.5;
+}
+
+.by-field--sm {
+  min-height: 36px;
+  padding: 0.35rem 0.55rem;
+  font-size: 0.8125rem;
+}
+
+.by-file::file-selector-button {
+  margin-right: 0.75rem;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--by-line-strong);
+  background: transparent;
+  color: var(--by-ink);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.by-file::file-selector-button:hover {
+  background: var(--by-ink);
+  color: var(--by-paper);
+}
+
+/* ------------------------------------------------------------------ *
+ * Chips / status tags — rectangular, not pill
+ * ------------------------------------------------------------------ */
+.by-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid var(--by-line-strong);
+  color: var(--by-ink);
+}
+
+.by-chip--ok {
+  background: var(--by-ok);
+  border-color: var(--by-ok);
+  color: #fff;
+}
+
+.by-chip--hazard {
+  background: var(--by-black);
+  border-color: var(--by-black);
+  color: var(--by-yellow);
+}
+
+/* ------------------------------------------------------------------ *
+ * Callout notes — sharp, accent left border
+ * ------------------------------------------------------------------ */
+.by-note {
+  border: 1px solid var(--by-line);
+  border-left: 3px solid var(--by-line-strong);
+  padding: 0.85rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.by-note--ok {
+  border-left-color: var(--by-ok);
+}
+
+.by-note--warn {
+  border-left-color: var(--by-warn);
+}
+
+.by-note--error {
+  border-left-color: var(--by-error);
+}
+
+/* ------------------------------------------------------------------ *
+ * Editorial prose (about / guidelines)
+ * ------------------------------------------------------------------ */
+.by-prose {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+.by-prose h2 {
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  font-size: 1.05rem;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.by-prose p + p {
+  margin-top: 0.9rem;
+}
+
+.by-prose a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.by-prose ol,
+.by-prose ul {
+  margin-top: 0.75rem;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.by-prose ol {
+  list-style: decimal;
+}
+
+.by-prose ul {
+  list-style: disc;
+}
+
+/* ------------------------------------------------------------------ *
+ * Links
+ * ------------------------------------------------------------------ */
+.by-link {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+
+.by-link:hover {
+  text-decoration-color: var(--by-yellow);
+  text-decoration-thickness: 2px;
+}
+
+/* ------------------------------------------------------------------ *
+ * MapLibre — square the chrome to match
+ * ------------------------------------------------------------------ */
 .maplibregl-popup-content {
-  border-radius: 0.5rem;
+  border-radius: 0;
+  border: 1px solid #1a1a1a;
   padding: 0.75rem 1rem;
+}
+
+.maplibregl-ctrl-group {
+  border-radius: 0 !important;
+  border: 1px solid var(--by-line-strong) !important;
+  box-shadow: none !important;
+}
+
+.maplibregl-ctrl-group button + button {
+  border-top: 1px solid var(--by-line) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

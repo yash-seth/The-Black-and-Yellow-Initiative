@@ -83,17 +83,17 @@ export function LocationPicker({
     <div className="space-y-2">
       <div
         ref={container}
-        className="h-64 w-full rounded-lg overflow-hidden border border-black/10 dark:border-white/10"
+        className="h-64 w-full overflow-hidden border border-[color:var(--by-line-strong)]"
       />
-      <div className="flex items-center justify-between text-xs">
+      <div className="flex items-center justify-between gap-3 text-xs">
         <button
           type="button"
           onClick={useMyLocation}
-          className="rounded bg-black/10 dark:bg-white/10 px-3 py-1.5 font-medium"
+          className="by-btn by-btn--ghost by-btn--sm"
         >
           {locating ? "Locating…" : "📍 Use my location"}
         </button>
-        <span className="text-black/50 dark:text-white/50">
+        <span className="by-muted tabular-nums">
           {value
             ? `${value.lat.toFixed(5)}, ${value.lng.toFixed(5)}`
             : "Tap the map to place the pin"}

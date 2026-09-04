@@ -4,9 +4,12 @@ export const metadata: Metadata = { title: "Community guidelines" };
 
 export default function GuidelinesPage() {
   return (
-    <div className="mx-auto max-w-2xl w-full px-4 py-10 space-y-4">
-      <h1 className="text-2xl font-extrabold">Community guidelines</h1>
-      <ul className="text-sm list-disc pl-5 space-y-2">
+    <div className="mx-auto max-w-2xl w-full px-4 py-12">
+      <p className="by-eyebrow mb-4">Community</p>
+      <h1 className="by-title text-3xl sm:text-4xl">Community guidelines</h1>
+      <hr className="by-rule my-6" />
+      <div className="by-prose">
+      <ul>
         <li>
           <strong>Report real hazards only.</strong> This is for speed breakers
           that are unmarked, unsigned, or dangerously built &mdash; not for
@@ -34,10 +37,11 @@ export default function GuidelinesPage() {
           rules.
         </li>
       </ul>
-      <p className="text-sm text-black/60 dark:text-white/60">
+      <p className="by-muted" style={{ marginTop: "1.25rem" }}>
         Use the &ldquo;Report&rdquo; link on any pin or post to flag something
         for a moderator.
       </p>
+      </div>
     </div>
   );
 }
